@@ -1,18 +1,20 @@
-const connection = require('./connection');
-// function for all things we want to ask
+// I am combining in my .then statement on index.js like in the activites for week 12
 
-class DB {
-    constructor(connection) {
-        this.connection = connection;
-    }
-}
+// const connection = require('./connection');
+// // function for all things we want to ask
 
-// next is all functions
- function updateEmployeeRole(employeeID, roleID) {
-    return this.connection.query(
-    "UPDATE employee SET role_id = ? WHERE id = ?",
-    [roleID, employeeID]
-    )
-};
+// class DB {
+//     constructor(connection) {
+//         this.connection = connection;
+//     }
+// }
 
-module.exports = new DB(connection);
+// // next is all functions
+//  function updateEmployeeRole(employeeID, roleID) {
+//     return this.connection.query(
+//     "UPDATE employee SET role_id = ? WHERE id = ?",
+//     [roleID, employeeID]
+//     )
+// };
+
+// module.exports = new DB(connection);

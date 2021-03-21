@@ -1,32 +1,66 @@
-const {prompt} = require('inquirer');
-const db = require('./db');
+const inquirer = require('inquirer');
+const mysql = require('mysql');
 require ('console.table');
+// const util = require('util');
 
-start();
-
+// host, user,database, password
+const connection = mysql.createConnection ({
+  host: 'localhost',
+  port: 3306,
+  user: 'root',
+  password: 'Coding2021!',
+  database: 'employee_tracker',
+});
+connection.connect((err) => {
+  if (err) throw err;
+//   console.log(`connected as id ${connection.threadId}`);
+  start();
+})
+// connection.query = util.promisify(connection.query);
 // call function here - ask all questions
-function start(){
-    const {choices} = prompt([
-        {
+// tutor helped me set up start function but I changed to format I know from class
+const start = () => {
+    inquirer.prompt({
             type: 'list',
-            message: 
-            name:
+            name: 'prompt' ,
+            message:'What would you like to do',
             choices: [
-                {
-                   name: 'View all Employees', 
-                   value: viewAllEmployees
-                }
-
-        }
-    ])
+                'View all Employees',
+                'View all Departments',
+                'View all Roles', 
+                'Add an Employee',
+                'Add a Department',
+                'Add a Role',
+                'Update Employee Role',
+                'Exit',
+            ]
+        })
+        .then((response) => {
+            switch (response.prompt) {
+                case 'View all Employees':
+                    viewEmployees();
+                    break;
+                case 'View all Departments':
+                    viewDepartments();
+                    break;
+                case 'View all Roles':
+                    viewRoles();
+                    break;
+                case 'Add an Employee':
+                    addEmployee();
+                    break;
+                case 'Add a Department':
+                    addDepartment();
+                    break;
+                case 'Add a Role':
+                    addRole();
+                    break;
+                case 'Update Employee Role':
+                    updateEmployeeRole();
+                    break;
+                default:
+                    console.log("You are all done!")
+                    break;
+            }
+        })
 } 
-switch (choices){
-    case viewAllEmployees;
-    return viewAllEmployees()
-}
-// inside of functions, 
-function updateRole(){
-    const employee_tracker = db.findAllEmployees()
-    const .map 
-    return 
-}
