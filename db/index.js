@@ -8,7 +8,7 @@ class DB {
 }
 
 // next is all functions
-updateEmployeeRole(employeeID, roleID) {
+ function updateEmployeeRole(employeeID, roleID) {
     return this.connection.query(
     "UPDATE employee SET role_id = ? WHERE id = ?",
     [roleID, employeeID]
