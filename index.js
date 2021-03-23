@@ -35,8 +35,8 @@ const start = () => {
                 'Exit',
             ]
         })
-        .then((response) => {
-            switch (response.prompt) {
+        .then((res) => {
+            switch (res.prompt) {
                 case 'View all Employees':
                     viewEmployees();
                     break;
@@ -87,3 +87,36 @@ const viewRoles = () => {
     });
     start();
 }
+
+const addEmployee = () => {
+    inquirer.prompt ([
+        {
+            name: 'first_name',
+            type: 'input',
+            message: 'Enter the first name of the new Employee:',
+        },
+        {
+            name: 'last_name',
+            type: 'input',
+            message: 'Enter the last name of the new Employee:',
+        },
+        {
+            name: 'role_id',
+            type: 'input',
+            message: 'Enter the role ID of the new Employee:'
+        },
+        {
+            name: 'manager_id',
+            type: 'input',
+            message: "Enter the Managers ID of the new Employee, if applicable:",
+        },
+    ])
+    .then (function(res) {
+        let newQuery = `INSERT INTO employee (first_name, last_name, role_id, manager_id)
+                        VALUES('${res.first_name}','${res.last_name}','${res.role_id}','${res.manager_id}')`; 
+        connection.query(newQuery, function(err, res){
+            if(err) throw err;
+            viewEmployees();
+        });
+    });
+};
