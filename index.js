@@ -120,3 +120,20 @@ const addEmployee = () => {
         });
     });
 };
+const addDepartment = () => {
+    inquirer.prompt([
+        {
+            name: 'department_name',
+            type: 'input',
+            message: 'Enter the Department name you want to add:',
+        },
+    ])
+    .then(function (res){
+        let newQuery = `INSERT INTO department (department_name)
+            VALUES ('${res.department_name}')`;
+        connection.query(newQuery, function(err, res){
+            if (err) throw err;
+            viewDepartments();
+        })
+    });
+};
