@@ -67,7 +67,9 @@ const start = () => {
 const viewEmployees = () => {
     connection.query("SELECT * FROM employee", function (err, res) {
         if (err) throw err;
+        console.log("\n")
         console.table(res);
+        
     });
     start();
 };
@@ -75,7 +77,8 @@ const viewEmployees = () => {
 const viewDepartments = () => {
     connection.query("SELECT * FROM department", function (err,res){
         if (err) throw err;
-        console.table(res)
+        console.log("\n")
+        console.table(res);
     });
     start();
 };
@@ -83,7 +86,10 @@ const viewDepartments = () => {
 const viewRoles = () => {
     connection.query("SELECT * FROM role", function(err,res){
         if (err) throw err;
+        console.log("\n")
         console.table(res)
+        // make table 
+        
     });
     start();
 }
@@ -113,7 +119,7 @@ const addEmployee = () => {
     ])
     .then (function(res) {
         let newQuery = `INSERT INTO employee (first_name, last_name, role_id, manager_id)
-                        VALUES('${res.first_name}','${res.last_name}','${res.role_id}','${res.manager_id}')`; 
+                VALUES('${res.first_name}','${res.last_name}','${res.role_id}','${res.manager_id}')`; 
         connection.query(newQuery, function(err, res){
             if(err) throw err;
             viewEmployees();
@@ -136,4 +142,32 @@ const addDepartment = () => {
             viewDepartments();
         })
     });
+}; 
+const addRole = () => {
+    inquirer.prompt ([
+        {
+            name: 'title',  
+            type: 'input',
+            message: 'Enter the title of the new Employee Role:',
+        },
+        {
+            name: 'salary',
+            type: 'input',
+            message: 'Enter the salary of the new Employee Role:',
+        },
+        {
+            name: 'department_id',
+            type: 'input',
+            message: 'Enter the department ID of the new Employee Role:',
+        },
+    ])
+    .then(function(res){
+        let newQuery = `INSERT INTO role (title, salary, department_id)
+            VALUES ('${res.title}', '${res.salary}', '${res.department_id}')`;
+        connection.query(newQuery, function(err, res){
+            if (err) throw err;
+            viewRoles();
+        });
+    });
 };
+
