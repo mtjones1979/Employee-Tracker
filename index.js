@@ -107,9 +107,9 @@ const addEmployee = () => {
             message: 'Enter the last name of the new Employee:',
         },
         {
-            name: 'role_id',
+            name: 'title',
             type: 'input',
-            message: 'Enter the role ID of the new Employee:'
+            message: 'Enter the title of the new Employee:'
         },
         {
             name: 'manager_id',
@@ -170,4 +170,54 @@ const addRole = () => {
         });
     });
 };
-
+const updateEmployeeRole = () => {
+    let empName;
+    let employees;
+    let empNames;
+    
+    connection.query(
+        `SELECT emp.id, emp.first_name, emp.last_name, CONCAT(emp.first_name,' ', emp.last_name)
+        as full_name, emp.role_id, r.title
+        FROM employee emp
+        INNER JOIN role r
+        ON emp.role_id = r.id`,
+        function(err, res) {
+            if (err) throw err;
+            console.log("Res: ", res);
+            employees = res;
+            empNames = res.map((employee) => employee.full_name);
+            inquirer.prompt([
+                {
+                name: "employee",
+                type: "input",
+                message: "Which employee would you like to update?",
+                choices: empNames,
+                },
+            ])
+            .then(function(res){
+                let roles = [
+                    ...new Set(employees.map((employee) => employee.title)),
+                ].sort();
+                empName = res.employee;
+                inquirer.prompt([
+                    {
+                        name: "role",
+                        type: "list",
+                        message: `What role would you like to assign to ${empName}?`,
+                        choices: roles,
+                    },
+                ])
+                .then(function (res){
+                    let empRole = employees.find(
+                        (employee) => employee.title === res.role);
+                    let empID = employees.find(employee => employee.full_name === empName);
+                    let newQuery = `UPDATE employee SET role_id = ${empRole.role_id} WHERE id = ${empID.id}`;
+                    connection.query(newQuery, function(err, res){
+                        if (err) throw err;
+                        viewEmployees();
+                    });
+                });
+            });
+        }
+    );
+};
