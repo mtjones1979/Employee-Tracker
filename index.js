@@ -107,9 +107,9 @@ const addEmployee = () => {
             message: 'Enter the last name of the new Employee:',
         },
         {
-            name: 'title',
+            name: 'role_id',
             type: 'input',
-            message: 'Enter the title of the new Employee:'
+            message: 'Enter the Role ID of the new Employee:'
         },
         {
             name: 'manager_id',

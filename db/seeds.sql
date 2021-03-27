@@ -8,8 +8,3 @@ INSERT INTO employee (first_name, last_name, role_id, manager_id)
 VALUES ("Natacha", "Ndabahagamye", 1, 1), ("Mateo", "Starity", 4, 1), ("Steven", "Brown", 2, 2), ("Charlie", "Holleman", 5, 2), ("Mia", "Jones", 3, 3), ("Natalya", "Rae", 6, 3);
 
 
--- SELECT  role.department_id, employee.first_name, employee.last_name, role.title, role.salary
--- FROM role INNER JOIN employee
--- ON (role.department_id = employee.department_id)
--- WHERE (topalbum.artist = 'Queen' and top5000.artist = 'Queen')
--- ORDER BY topalbum.year, topalbum.position;

@@ -18,10 +18,13 @@
   ## Usage
   
   * Application Video:
-  [Video Link]()
+  [Video Link](https://drive.google.com/file/d/1QA3aC8NyeL452v7raZyqwqrovjFyMXZc/preview)
   
   * Screenshots:
-  ![alt text]()
+  ![alt text](https://user-images.githubusercontent.com/74076318/112724367-fb029100-8ee0-11eb-861d-84a8b05ca0ab.png)
+  ![alt text](https://user-images.githubusercontent.com/74076318/112724401-26857b80-8ee1-11eb-9c5b-a1341219a15f.png)
+  ![alt text](https://user-images.githubusercontent.com/74076318/112724435-53399300-8ee1-11eb-9c52-24f04522fe0d.png)
+  ![alt text](https://user-images.githubusercontent.com/74076318/112724446-6a788080-8ee1-11eb-8b12-2d2e39424659.png))
 
   ## Installation
   I had to install inquirer, console.table, and mysql.
